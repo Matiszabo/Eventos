@@ -1,21 +1,18 @@
-import LocationRepository from "../repositories/location-repository.js";
-
-class LocationService {
-    constructor() {
-        this.locationRepository = new LocationRepository();
+import LocationsRepository from '../repositories/location-repository.js';
+export default class LocationsService {
+    getAllAsync = async () => {
+        const repo = new LocationsRepository();
+        const LocationsArray = await repo.getAllLocations();
+        return LocationsArray;
     }
-
-    async getAllLocations() {
-        return await this.locationRepository.getAll();
+    getLocationById = async (id) => {
+        const repo = new LocationsRepository();
+        const LocationsArray = await repo.getLocationById(id);
+        return LocationsArray;
     }
-
-    async getLocationById(id) {
-        return await this.locationRepository.getById(id);
-    }
-
-    async getEventLocationsByLocationId(id) {
-        return await this.locationRepository.getEventLocationsByLocationId(id);
+    getEventLocation = async (id) => {
+        const repo = new LocationsRepository();
+        const LocationsArray = await repo.getEventLocation(id);
+        return LocationsArray;
     }
 }
-
-export default LocationService;

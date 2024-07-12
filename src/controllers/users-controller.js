@@ -1,19 +1,19 @@
-// src/controllers/user-controller.js
-import express from 'express';
+import {Router} from 'express';
+import express from "express";
+import UsersService from "../services/users-service.js"
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import { getUserByUsername, createUser } from '../services/user-service.js';
+//import bcrypt from 'bcryptjs';
+const UserRouter =  Router();
+const svc = new UsersService()
 
-const router = express.Router();
-
-// Login Endpoint
-router.post('/login', async (req, res) => {
+//6
+UserRouter.post('/login', async (req, res) => {
     const { username, password } = req.body;
     console.log('username:', username);
     console.log('password:', password);
 
     try {
-        const user = await getUserByUsername(username, password);
+        const user = await svc.login(username, password);
         console.log('User retrieved from DB:', user);
 
         if (user == null) {
@@ -40,9 +40,9 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// Register Endpoint
-router.post('/register', async (req, res) => {
-    const { first_name, last_name, username, password } = req.body;
+// 6.2 NO FUNCIONA
+UserRouter.post('/register', async (req, res) => {
+    const { id, first_name, last_name, username, password } = req.body;
 
     if (!first_name || !last_name) {
         return res.status(400).json({ message: 'Los campos first_name o last_name están vacíos.' });
@@ -58,8 +58,8 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-        //const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = await createUser({ first_name, last_name, username, password});
+       // const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = await svc.crearUser({ id, first_name, last_name, username, password});
         console.log('New user created:', newUser);
         res.status(201).json({ message: 'Usuario registrado exitosamente.' });
     } catch (error) {
@@ -67,5 +67,5 @@ router.post('/register', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+export default UserRouter;
 
-export default router;

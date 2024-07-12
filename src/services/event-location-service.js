@@ -1,15 +1,29 @@
-import {
-  getAllEventLocations,
-  getEventLocationById,
-  createEventLocation,
-  updateEventLocation,
-  deleteEventLocation
-} from '../repositories/event-location-repository.js';
+import EventLocationRepository from '../repositories/location-repository.js';
 
-export {
-  getAllEventLocations,
-  getEventLocationById,
-  createEventLocation,
-  updateEventLocation,
-  deleteEventLocation
-};
+export default class EventLocationService {
+  
+  getAllEventLocations = async () => {
+    const repo = new EventLocationRepository();
+    return await repo.getAllEventLocations();
+  }
+
+  getEventLocationById = async (id) => {
+    const repo = new EventLocationRepository();
+    return await repo.getEventLocationById(id);
+  }
+
+  createEventLocation = async (eventLocationData) => {
+    const repo = new EventLocationRepository();
+    return await repo.createEventLocation(eventLocationData);
+  }
+
+  updateEventLocation = async (eventLocationData) => {
+    const repo = new EventLocationRepository();
+    return await repo.updateEventLocation(eventLocationData);
+  }
+
+  deleteEventLocation = async (id) => {
+    const repo = new EventLocationRepository();
+    return await repo.deleteEventLocation(id);
+  }
+}

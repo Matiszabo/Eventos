@@ -1,12 +1,11 @@
-// src/db-config.js
 import pg from 'pg';
 
 const pool = new pg.Pool({
     host: 'localhost',
-    database: 'dai-events',
+    database: 'postgres',
     user: 'postgres',
     password: 'root',
-    port: 5432, // Puerto por defecto de PostgreSQL
+    port: 5432,
 });
 
 export default pool;
