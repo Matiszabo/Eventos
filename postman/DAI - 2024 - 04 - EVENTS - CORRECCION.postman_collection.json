@@ -1,0 +1,1418 @@
+{
+	"info": {
+		"_postman_id": "9d592e1c-72f0-480b-a6cb-11de09dedfe7",
+		"name": "DAI - 2024 - 04 - EVENTS - CORRECCION",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5470850"
+	},
+	"item": [
+		{
+			"name": "TP04 - PG - EVENTS Correccion",
+			"item": [
+				{
+					"name": "02 - event - GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "03 - event - GetAll Search (*)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event?category=aut",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "category",
+									"value": "aut"
+								},
+								{
+									"key": "startdate",
+									"value": "2024-11-14",
+									"disabled": true
+								},
+								{
+									"key": "tag",
+									"value": "rock",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - event  - GetById (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/8",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "04 - event  - GetById (404)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/999",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - event-enrollment - GetByIdEvent (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/6/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment"
+							],
+							"query": [
+								{
+									"key": "first_name",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "last_name",
+									"value": "Ulman",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "ilán",
+									"disabled": true
+								},
+								{
+									"key": "attended",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "rating",
+									"value": "9",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "05 - event-enrollment - GetByIdEvent (404)  (*)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/999/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - user - Login (200)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();\r",
+									"pm.environment.set('token', res.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"pablo.ulman@ort.edu.ar\",\r\n    \"password\": \"pabulm101\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/user/login",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - user - Login (400) (*)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();\r",
+									"pm.environment.set('token', res.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"@@\",\r\n    \"password\": \"XX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/user/login",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - user - Login (401)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json();\r",
+									"pm.environment.set('token', res.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"pablo.ulman@ort.edu.ar\",\r\n    \"password\": \"claveincorrecta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/user/login",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - user - Create (201)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Guillermo\",\r\n    \"last_name\": \"Wonka\",\r\n    \"username\": \"Willy@chocolats.com\",\r\n    \"password\": \"ompaloompa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/user/register",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "06 - user - Create (400) (*)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"XX\",\r\n    \"last_name\": \"XX\",\r\n    \"username\": \"@@\",\r\n    \"password\": \"XX\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/user/register",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - GetById (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/6",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - GetById (404)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/999",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								"999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - locations - ByProvince (200)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/6/locations",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								"6",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - locations - ByProvince (404)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/999/locations",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								"999",
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - Create (201)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nueva Provincia\",\r\n    \"full_name\": \"Provincia de Nueva Provincia\",\r\n    \"latitude\": -24.895086288452148,\r\n    \"longitude\": -59.93218994140625,\r\n    \"display_order\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - Create (400)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"XX\",\r\n    \"full_name\": \"Provincia de Nueva Provincia\",\r\n    \"latitude\": \"XX\",\r\n    \"longitude\": \"XX\",\r\n    \"display_order\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - Update (200)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 90,\r\n    \"name\": \"Provincia Modificada 90\",\r\n    \"full_name\": \"Provincia Modificada 90\",\r\n    \"latitude\": -13.895086288452148,\r\n    \"longitude\": -14.93218994140625,\r\n    \"display_order\": 90\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - Update (400) (*)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 90,\r\n    \"name\": \"XX\",\r\n    \"full_name\": \"Modificada\",\r\n    \"latitude\": \"XX\",\r\n    \"longitude\": \"XX\",\r\n    \"display_order\": 90\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - Update (404)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 999,\r\n    \"name\": \"Nueva Provincia 148\",\r\n    \"full_name\": \"Provincia de Nueva Provincia\",\r\n    \"latitude\": -13.895086288452148,\r\n    \"longitude\": -14.93218994140625,\r\n    \"display_order\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - DeleteById (200)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/96",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								"96"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "07 - province - DeleteById (404)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/province/999",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"province",
+								"999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - Create (401) - Sin Auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"xxxx\",\r\n    \"description\": \"Taylor Swift viene a Argentina el 9, 10 y 12 de noviembre de 2023.\",\r\n    \"id_event_category\": 3,\r\n    \"id_event_location\": 4,\r\n    \"start_date\": \"2023-11-12T03:00:00.000Z\",\r\n    \"duration_in_minutes\": 120,\r\n    \"price\": \"50000\",\r\n    \"enabled_for_enrollment\": \"1\",\r\n    \"max_assistance\": 120000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - Create (201) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Nuevo Evento de DAI\",\r\n    \"description\": \"Descripcion de Nuevo Evento de DAI\",\r\n    \"id_event_category\": 3,\r\n    \"id_event_location\": 4,\r\n    \"start_date\": \"2024-11-12T03:00:00.000Z\",\r\n    \"duration_in_minutes\": 120,\r\n    \"price\": \"50000\",\r\n    \"enabled_for_enrollment\": \"1\",\r\n    \"max_assistance\": 120000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - Create (400) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"XX\",\r\n    \"description\": \"XX\",\r\n    \"id_event_category\": 3,\r\n    \"id_event_location\": 4,\r\n    \"start_date\": \"2024-11-12T03:00:00.000Z\",\r\n    \"duration_in_minutes\": -100,\r\n    \"price\": -50000,\r\n    \"enabled_for_enrollment\": \"1\",\r\n    \"max_assistance\": 999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - Update  (401) - Sin Auth",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 90,\r\n    \"name\": \"Modificacion Evento de DAI\",\r\n    \"description\": \"Descripcion de Modificacion Evento de DAI\",\r\n    \"id_event_category\": 3,\r\n    \"id_event_location\": 4,\r\n    \"start_date\": \"2024-11-12T03:00:00.000Z\",\r\n    \"duration_in_minutes\": 120,\r\n    \"price\": \"50000\",\r\n    \"enabled_for_enrollment\": \"1\",\r\n    \"max_assistance\": 120000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - Update(200) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 90,\r\n    \"name\": \"Modificacion Evento de DAI\",\r\n    \"description\": \"Descripcion de Modificacion Evento de DAI\",\r\n    \"id_event_category\": 3,\r\n    \"id_event_location\": 4,\r\n    \"start_date\": \"2024-11-12T03:00:00.000Z\",\r\n    \"duration_in_minutes\": 120,\r\n    \"price\": \"50000\",\r\n    \"enabled_for_enrollment\": \"1\",\r\n    \"max_assistance\": 120000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - Update (400) - Auth (*)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 90,\r\n    \"name\": \"XX\",\r\n    \"description\": \"XX\",\r\n    \"id_event_category\": 3,\r\n    \"id_event_location\": 4,\r\n    \"start_date\": \"2024-11-12T03:00:00.000Z\",\r\n    \"duration_in_minutes\": -100,\r\n    \"price\": -50000,\r\n    \"enabled_for_enrollment\": \"1\",\r\n    \"max_assistance\": 999999\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - Update (404) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 999,\r\n    \"name\": \"s4ssxxxyyNueva Provincia\",\r\n    \"full_name\": \"x4xyyProvincia de Nueva Provincia\",\r\n    \"latitude\": -13.895086288452148,\r\n    \"longitude\": -14.93218994140625,\r\n    \"display_order\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - DeleteById (401) - Sin Auth",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/139",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"139"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - DeleteById (200) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/139",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"139"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - DeleteById (401) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/139",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"139"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "08 - event - DeleteById (404) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/999",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - Create (401) - Sin Auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/6/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - Create (200) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/18/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"18",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - Create (400) - Auth (*)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/999/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - Create (404) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/999/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - DeleteById (401) - Sin Auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/6/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - DeleteById (200) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/18/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"18",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - DeleteById (400) - Auth (*)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/6/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "09 - event-enrollment - DeleteById (404) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/999/enrollment",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999",
+								"enrollment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - event-rating- Create (401) - Sin Auth",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observations\": \"Fue increíble!!. Conviene estacionar lejos!!!!\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/6/enrollment/8",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - event-rating- Create (200) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observations\": \"Fue increíble!!. Conviene estacionar lejos!!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/6/enrollment/8",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - event-rating- Create (400) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observations\": \"Fue increíble!!. Conviene estacionar lejos!!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/6/enrollment/PEPE",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"6",
+								"enrollment",
+								"PEPE"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - event-rating- Create (404) - Auth",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"observations\": \"Fue increíble!!. Conviene estacionar lejos!!!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/api/event/999/enrollment/8",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"api",
+								"event",
+								"999",
+								"enrollment",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unknown EndPoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}{{domain}}{{port}}/saracatunga?cauilquiercosa=blahhblahh",
+							"host": [
+								"{{scheme}}{{domain}}{{port}}"
+							],
+							"path": [
+								"saracatunga"
+							],
+							"query": [
+								{
+									"key": "cauilquiercosa",
+									"value": "blahhblahh"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
