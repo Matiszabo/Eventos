@@ -4,15 +4,12 @@ export default class UsersService {
     constructor() {
         this.repos = new UserRepository();
     }
-    login = async (username, password) => {
-        const user= this.repos.login(username, password);
-        if (user) {
-          return { id: user.id, username: user.username }; 
-      }
-      return null;
-      }
-    crearUser(id, first_name, last_name, username, password) {
-        return this.repos.crearUser(id, first_name, last_name, username, password);
+
+    login = async (username) => {
+        return this.repos.login(username);
+    }
+
+    crearUser = async ({ first_name, last_name, username, password }) => {
+        return this.repos.crearUser(first_name, last_name, username, password);
     }
 }
-
