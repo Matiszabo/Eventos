@@ -1,50 +1,67 @@
+// Repositories/users-repository.js
 import pool from "../configs/db-config.js";
-import bcrypt from 'bcryptjs'; // Importamos bcrypt para encriptar la contraseña
+import pkg from 'pg';
+import bcrypt from 'bcryptjs';
+const { Client } = pkg;
 
 export default class UserRepository {
-    login = async (username) => {
-        const client = await pool.connect();
+    login = async (username, password) => {
+        const client = await pool.connect(); 
         try {
-            const rta = await client.query(
-                `SELECT * FROM users WHERE username = $1`, 
-                [username]
-            );
-            
-            if (rta.rows.length > 0) {
-                return rta.rows[0];
+            console.log('Buscando usuario con username:', username);
+    
+            const sql = 'SELECT * FROM users WHERE username = $1';
+            const result = await client.query(sql, [username]);
+    
+            console.log('Resultado de la consulta:', result.rows);
+    
+            const user = result.rows[0];
+    
+            if (!user) {
+                console.log('Usuario no encontrado');
+                return null;
             }
-            return null;
+    
+            // Asegúrate de que el hash es válido y haz la comparación
+            console.log('Hash almacenado en la base de datos:', user.password);
+    
+            const isPasswordCorrect = await bcrypt.compare(password, user.password);
+            console.log('Comparación de contraseña:', isPasswordCorrect);
+    
+            if (isPasswordCorrect) {
+                return user;
+            } else {
+                console.log('Contraseña incorrecta');
+                return null;
+            }
         } catch (error) {
-            console.error('Error during login:', error);
+            console.error('Error durante el login:', error);
             return null;
         } finally {
             client.release();
         }
-    }
-
+    };
+    
     crearUser = async (first_name, last_name, username, password) => {
         const client = await pool.connect();
         try {
-            // Validar que todos los campos estén presentes
             if (!first_name || !last_name || !username || !password) {
                 console.error('Faltan campos para registrar al usuario.');
                 return false;
             }
-
-            // Encriptar la contraseña antes de guardarla
-            const hashedPassword = await bcrypt.hash(password, 10);
-
-            // Inserción del nuevo usuario en la base de datos con la contraseña encriptada
+           
+           
             await client.query(
                 `INSERT INTO users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4)`,
-                [first_name, last_name, username, hashedPassword] // Usar hashedPassword
+                [first_name, last_name, username, password]
             );
             return true;
         } catch (error) {
-            console.error('Error during user creation:', error);
+            console.error('Error durante la creación de usuario:', error);
             return false;
         } finally {
             client.release();
         }
     }
-}
+    
+}    
